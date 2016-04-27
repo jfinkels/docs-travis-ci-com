@@ -20,8 +20,10 @@ $(document).ready(function() {
   });
 
 
-  var storageId = 'travis-docs-nav';
-  var storageContent = window.localStorage.getItem(storageId);
+  var sectionStorageId = 'travis-docs-nav';
+  var storageContent = window.localStorage.getItem(sectionStorageId);
+  var linkStorageId = 'travis-docs-current';
+  var linkStorageContent = window.localStorage.getItem(linkStorageId);
   $('.sidebar-navigation').addClass('has-js');
 
   if (storageContent) {
@@ -30,10 +32,20 @@ $(document).ready(function() {
     $('.sidebar-navigation ul:first-of-type').addClass('is-open');
   }
 
+  if (linkStorageContent) {
+    $('.sidebar-navigation a:contains('+ linkStorageContent +')').addClass('is-active');
+  }
+
   $('.sidebar-navigation nav h2').click(function(ev) {
-    window.localStorage.setItem(storageId, $(ev.target).text());
+    window.localStorage.setItem(sectionStorageId, $(ev.target).text());
     $('.sidebar-navigation .is-open').removeClass('is-open');
     $(this).next('ul').addClass('is-open');
+  });
+
+  $('.sidebar-navigation a').click(function(ev) {
+    window.localStorage.setItem(linkStorageId, $(ev.target).text());
+    $('.sidebar-navigation a.is-active').removeClass('is-active');
+    $(this).addClass('is-active');
   });
 
 });
