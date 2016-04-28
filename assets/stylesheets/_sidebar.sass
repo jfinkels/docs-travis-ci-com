@@ -1,8 +1,27 @@
 .sidebar-navigation.has-js
 
   h2
-    cursor: pointer  
+    position: relative
+    cursor: pointer
+    &:after
+      content: ""
+      display: block
+      position: absolute
+      width: 1em
+      height: 0.8em
+      right: 0
+      top: 0.3em
+      transform: rotate(90deg)
+      background:
+        image: url(/images/ui/icon-arrowtabs.svg)
+        repeat: no-repeat
+        position: 95% 0
 
+    &.is-open
+      &:after
+        transform: rotate(-90deg)
+      
+  
   ul
     height: 0
     overflow: hidden
